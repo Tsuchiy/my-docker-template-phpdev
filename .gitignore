@@ -1,0 +1,17 @@
+.DS_Store
+Thumbs.db
+
+.temp/*
+ext/*
+
+nbproject
+nbproject/*
+.idea
+.idea/*
+~$*
+!.gitkeep
+
+mysql/mysql_data/*
+!mysql/mysql_data/.gitkeep
+phproot/*
+!phproot.gitkeep

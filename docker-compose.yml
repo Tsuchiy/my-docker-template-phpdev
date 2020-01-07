@@ -1,0 +1,41 @@
+version: '3'
+services:
+  nginx:
+    build: ./nginx
+    ports:
+        - "8080:80"
+    volumes:
+      - ./webroot:/opt/webroot
+    depends_on:
+      - php
+    environment:
+      TZ: Asia/Tokyo
+  php:
+    build: ./php
+    volumes:
+      - ./phproot:/opt/phproot
+    depends_on:
+      - mysql
+    environment:
+      TZ: Asia/Tokyo      
+  mysql:
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql/mysql_init:/docker-entrypoint-initdb.d
+      - ./mysql/mysql_data:/var/lib/mysql
+    environment:
+      TZ: Asia/Tokyo
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: localtest
+      MYSQL_USER: localuser
+      MYSQL_PASSWORD: localuser
+  redis:
+    image: redis:latest
+    environment:
+      TZ: Asia/Tokyo
+    ports:
+      - "6379:6379"
+
+
